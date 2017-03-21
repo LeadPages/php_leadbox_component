@@ -30,7 +30,7 @@ class Leadboxes
      * @property string leadboxesUrl
      */
     public $leadboxesUrl;
-    public $certFile = ABSPATH . WPINC . '/certificates/ca-bundle.crt';
+    public $certFile;
 
     public function __construct(Client $client, LeadpagesLogin $login)
     {
@@ -38,6 +38,8 @@ class Leadboxes
         $this->client = $client;
         $this->login = $login;
         $this->leadboxesUrl = "https://my.leadpages.net/leadbox/v1/leadboxes";
+        $this->certFile = ABSPATH . WPINC . '/certificates/ca-bundle.crt';
+
     }
 
 
