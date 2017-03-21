@@ -30,6 +30,7 @@ class Leadboxes
      * @property string leadboxesUrl
      */
     public $leadboxesUrl;
+    public $certFile = ABSPATH . WPINC . '/certificates/ca-bundle.crt';
 
     public function __construct(Client $client, LeadpagesLogin $login)
     {
@@ -46,7 +47,7 @@ class Leadboxes
             $response = $this->client->get($this->leadboxesUrl,
                 [
                     'headers' => ['LP-Security-Token' => $this->login->token],
-                    'verify' => false,
+                    'verify' => $this->certFile,
                 ]);
             $response = [
                 'code' => '200',
@@ -70,7 +71,7 @@ class Leadboxes
             $response = $this->client->get($url,
                 [
                     'headers' => ['LP-Security-Token' => $this->login->token],
-                    'verify' => false,
+                    'verify' => $this->certFile,
                 ]);
 
             $body = $response->getBody()->getContents();
