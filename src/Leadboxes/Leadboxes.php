@@ -48,7 +48,7 @@ class Leadboxes
         try {
             $response = $this->client->get($this->leadboxesUrl,
                 [
-                    'headers' => ['LP-Security-Token' => $this->login->token],
+                    'headers' => ['Authorization' => 'bearer ' . $this->login->apiKey],
                     'verify' => $this->certFile,
                 ]);
             $response = [
