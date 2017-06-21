@@ -30,13 +30,13 @@ class Leadboxes
     public $leadboxesUrl;
     public $certFile;
 
-   /**        
-    * @todo Add configuration/DI option for leadboxesUrl for testability        
-    * @todo Make certFile path configurable and optional        
-    *        
-    * @param \GuzzleHttp\Client  $client        
-    * @param LeadpagesLogin      $login         
-    *        
+   /**
+    * @todo Add configuration/DI option for leadboxesUrl for testability
+    * @todo Make certFile path configurable and optional
+    *
+    * @param \GuzzleHttp\Client $client
+    * @param LeadpagesLogin     $login 
+    *
     */
     public function __construct(Client $client, LeadpagesLogin $login)
     {
@@ -75,13 +75,13 @@ class Leadboxes
         return $response;
     }
 
-   /**        
-    * Fetch leadbox embed code by id + type        
-    *        
-    * @param string $id        
-    * @param string $type        
-    *        
-    * @return mixed        
+   /**
+    * Fetch leadbox embed code by id + type
+    *
+    * @param string $id
+    * @param string $type
+    *
+    * @return mixed|Exception
     */
     public function getSingleLeadboxEmbedCode($id, $type)
     {
@@ -94,10 +94,11 @@ class Leadboxes
 
             $body = $response->getBody()->getContents();
             $body = json_decode($body, true);
+            $embed_code = $body['_items']['publish_settings']['embed_code'];
 
             $response = [
                 'code' => '200',
-                'response' => json_encode(['embed_code' => $body['_items']['publish_settings']['embed_code']])
+                'response' => json_encode(['embed_code' => $embed_code])
             ];
 
         } catch (ClientException $e) {
@@ -114,12 +115,12 @@ class Leadboxes
         return $response;
     }
 
-   /**        
+   /**
+    * 
+    * @param string $id
+    * @param string $type
     *        
-    * @param string $id        
-    * @param string $type        
-    *        
-    * @return string Leadbox url        
+    * @return string Leadbox url
     */
     public function buildSingleLeadboxUrl($id, $type)
     {
@@ -132,7 +133,7 @@ class Leadboxes
      * Build response data structure for errors
      *
      * @param Exception $e
-     * @param string $message
+     * @param string    $message
      *
      * @return array
      */
