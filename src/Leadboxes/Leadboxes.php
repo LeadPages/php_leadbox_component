@@ -36,7 +36,7 @@ class Leadboxes
         $this->client = $client;
         $this->login = $login;
         $this->login->getApiKey();
-        $this->leadboxesUrl = "https://my.leadpages.net/leadbox/v1/leadboxes";
+        $this->leadboxesUrl = "https://api.leadpages.io/content/v1/leadboxes";
         $this->certFile = ABSPATH . WPINC . '/certificates/ca-bundle.crt';
 
     }
@@ -67,6 +67,7 @@ class Leadboxes
 
     public function getSingleLeadboxEmbedCode($id, $type)
     {
+
         try {
             $url = $this->buildSingleLeadboxUrl($id, $type);
             $response = $this->client->get($url,
