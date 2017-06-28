@@ -1,0 +1,12 @@
+<script src="//static.leadpages.net/leadboxes/current/embed.js" async defer></script> 
+{% if options.type == 'text' %}
+<a href="" data-leadbox-popup="{{ id }}">{{ options.text }}</a> 
+{% elseif options.type == 'button' %}
+<button data-leadbox-popup="{{ id }}" style="background: {{ options.btnColor }};border-color: {{ options.btnColor }};border-radius: 20px;color: {{ options.btnTextColor }};display: inline-block;vertical-align: middle;padding: 16px 32px;min-width: 192px;border: 1px solid {{ options.btnColor }};font-size: 1rem;font-family: Helvetica, Arial, sans-serif;text-align: center;outline: 0;line-height: 1;cursor: pointer;-webkit-transition: background 0.3s, color 0.3s, border 0.3s;transition: background 0.3s, color 0.3s, border 0.3s;  box-shadow: 0px {{ options.btnShadowSize }}px 5px rgba(0, 0, 0, 0.6);">{{ options.text|default("Click to subscribe") }}</button> 
+{% elseif options.type == 'image' %}
+<img style="cursor:pointer;" data-leadbox-popup="{{ id }}" src="{{ options.imgUrl }}" alt="{{ options.text|default('Click to subscribe') }}"/> 
+{% elseif options.type == 'timed' %}
+<script>window.addEventListener('LPLeadboxesReady',function(){LPLeadboxes.addDelayedLeadbox('{{ id }}',{delay:'{{ options.delay|default("5") }}s',views:{{ options.views|default("0") }},dontShowFor:'{{ options.days|default("0") }}d'});});</script> 
+{% elseif options.type == 'exit' %}
+<script>window.addEventListener('LPLeadboxesReady',function(){LPLeadboxes.setExitIntent('{{ id }}',{dontShowFor:'{{ options.days|default("0") }}d'});});</script> 
+{% endif %}

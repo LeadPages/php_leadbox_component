@@ -80,10 +80,11 @@ class Leadboxes
     *
     * @param string $id
     * @param string $type
+    * @param string $content
     *
     * @return mixed|Exception
     */
-    public function getSingleLeadboxEmbedCode($id, $type)
+    public function getSingleLeadboxEmbedCode($id, $type = '', $content = '')
     {
         try {
             $url = $this->buildSingleLeadboxUrl($id, $type);
